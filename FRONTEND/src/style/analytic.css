@@ -1,0 +1,44 @@
+.transaction-count {
+  box-shadow: 0 0 2px gray;
+  padding: 15px;
+  border-radius: 10px;
+  color:  rgb(58, 53, 53) !important;
+}
+.transaction-count1 {
+  margin-left: 20px;
+  box-shadow: 0 0 2px gray;
+  padding: 15px;
+  border-radius: 10px;
+  color:  rgb(58, 53, 53) !important;
+}
+
+.analytic h4 {
+  font-size: 20px;
+  color: gray !important;
+}
+.analytic h5 {
+  font-size: 17px;
+  color: gray !important;
+}
+.catagory-card {
+  margin-left: 20px;
+  padding: 20px;
+  box-shadow: 0 0 2px gray;
+  margin-top: 15px;
+  border-radius: 10px;
+}
+.pemasukan-catagory-analysis h3{
+  margin-left: 20px;
+  color:  gray !important;
+}
+.pemasukan-catagory-analysis{
+  margin-top: 40px;
+}
+
+.pengeluaran-catagory-analysis h3{
+  color:  gray !important;
+  margin-left: 20px;
+}
+.pengeluaran-catagory-analysis{
+  margin-top: 40px;
+}
