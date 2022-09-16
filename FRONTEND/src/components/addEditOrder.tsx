@@ -1,7 +1,8 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { Form, Input, message, Modal, Select } from 'antd'
+import { PlusOutlined } from '@ant-design/icons';
+import { Button, Divider, Form, Input, InputRef, message, Modal, Select, Space } from 'antd'
 import axios from 'axios';
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import Spinner from './spinner';
 
 
@@ -15,6 +16,9 @@ enum split {
   Parfum = 'parfum'
 
 }
+const { Option } = Select;
+
+let index = 0;
 
 function addEditOrder({setShowAddEditOrderModal, showAddEditOrderModal,selectedItemForEdit,setSelectedItemForEdit,getOrder, } : {
   setShowAddEditOrderModal : any;
@@ -26,6 +30,22 @@ function addEditOrder({setShowAddEditOrderModal, showAddEditOrderModal,selectedI
 { 
   const [type , setType]=useState(split.Semua)
   const [loading , setLoading] = useState(false)
+  const [items, setItems] = useState(['']);
+  const [name, setName] = useState('');
+  const inputRef = useRef<InputRef>(null);
+
+  const onNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setName(event.target.value);
+  };
+
+  const addItem = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    setItems([...items, name || `New item ${index++}`]);
+    setName('');
+    setTimeout(() => {
+      inputRef.current?.focus();
+    }, 0);
+  };
 
 
   const onFinish = async (values) => {
@@ -89,7 +109,28 @@ function addEditOrder({setShowAddEditOrderModal, showAddEditOrderModal,selectedI
                 </Form.Item>
                 
                 <Form.Item label='Nama Produk' name='katagori'>
-                  <Select placeholder='Pilihan Nama Produk'>
+                  <Select placeholder='Pilihan Nama Produk'  style={{ width: 300 }}
+                  dropdownRender={menu => (
+                    <>
+                      {menu}
+                      <Divider style={{ margin: '8px 0' }} />
+                      <Space style={{ padding: '0 8px 4px' }}>
+                        <Input
+                          placeholder="Masukan Produk Baru"
+                          ref={inputRef}
+                          value={name}
+                          onChange={onNameChange}
+                        />
+                        <Button type="text" icon={<PlusOutlined />} onClick={addItem}>
+                          Tambah Baru
+                        </Button>
+                      </Space>
+                    </>
+                        )}
+                  >
+                                  {items.map(item => (
+                  <Option key={item}>{item}</Option>
+                ))}
                   {type === split.Sabun && (
                     <>
                     <Select.Option value="pyary kunyit">Sabun Pyary Kunyit</Select.Option>
@@ -139,7 +180,6 @@ function addEditOrder({setShowAddEditOrderModal, showAddEditOrderModal,selectedI
                 <Form.Item label='total' name='total'>
                   <Input type='text' />
                 </Form.Item>
-
                 <Form.Item label='Tanggal' name='tanggal'>
                   <Input type='date' />
                 </Form.Item>

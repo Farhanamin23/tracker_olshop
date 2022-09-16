@@ -74,7 +74,6 @@ function Analytic({transaction}:{
           )})}
         </div>
       </div>
-
     </div>
     </div>
   )

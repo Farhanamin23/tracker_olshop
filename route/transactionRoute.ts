@@ -1,5 +1,4 @@
 import express from 'express'
-import { type } from 'os'
 const moment = require('moment')
 const Transaction  = require('../model/Transaction')
 const multer = require('multer')
@@ -8,7 +7,7 @@ const path = require('path')
 const router = express.Router();
 
 const storage= multer.diskStorage({
-    destination: ( req, file, cb ) => {
+    destination: ( req , file, cb ) => {
     cb(null, './image/')
     },
     filename:(req,file,cb) => {
