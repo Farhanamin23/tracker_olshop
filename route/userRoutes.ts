@@ -5,27 +5,42 @@ import jwt from 'jsonwebtoken'
 const router = express.Router();
 const auth = require("../middleware/auth");
 
-router.post("/login",  async function (req ,res ){
+router.post("/login", async (req, res) => {
   try {
-      const result = await User.findOne({
-        email : req.body.email,
-        password : req.body.password,
-        token : req.body.token
+    // Get user input
+    const { email, password } = req.body;
 
-      });
-      if (result) {
-        res.send(result) 
-      }else{
-        res.status(400).json("Error");
-      }
-  }catch(error){
-    res.status(400).json('Error')
+    // Validate user input
+    if (!(email && password)) {
+      res.status(400).send("All input is required");
+    }
+    // Validate if user exist in our database
+    const user = await User.findOne({ email });
+
+    if (user && (await bcrypt.compare(password, user.password))) {
+      // Create token
+      const token = jwt.sign(
+        { user_id: user._id, email },
+        process.env.TOKEN_KEY,
+        {
+          expiresIn: "2h",
+        }
+      );
+
+      // save user token
+      user.token = token;
+
+      // user
+      res.status(200).json(user);
+    }
+    res.status(400).send("Invalid Credentials");
+  } catch (err) {
+    console.log(err);
   }
-})
+});
 
 router.post("/register", async (req, res) => {
 
-  // Our register logic starts here
   try {
     // Get user input
     const { name, email, password } = req.body;

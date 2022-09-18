@@ -1,10 +1,11 @@
 import  express  from "express";
 require("dotenv").config();
-require("./config/dbConnect").connect();
+require("./mconfig/dbConnect").connect();
 const transactionRoute = require('./route/transactionRoute')
 const orderRoute = require('./route/orderRoute')
-const app = express()
+const resselerRoute = require('./route/resselerRoute')
 const userRoute= require('./route/userRoutes')
+const app = express()
 
 app.use(express.json())
 
@@ -14,5 +15,6 @@ const port = process.env.PORT || API_PORT;
 app.use('/api/user/', userRoute) 
 app.use('/api/transaction/', transactionRoute)
 app.use('/api/order/', orderRoute)
+app.use('/api/resseler/' ,resselerRoute)
 
 app.listen(port, () => console.log(`server running on port ${port}`))
