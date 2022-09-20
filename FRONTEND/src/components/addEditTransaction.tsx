@@ -1,7 +1,8 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { Form, Input, message, Modal, Select } from 'antd'
+import { PlusOutlined } from '@ant-design/icons';
+import { Button, Divider, Form, Input, InputRef, message, Modal, Select, Space } from 'antd'
 import axios from 'axios'
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import Spinner from './spinner';
 
 type test = {
@@ -13,6 +14,11 @@ enum tost {
   Pemasukan = 'Pemasukan',
   Pengeluaran = 'Pengeluaran'
 }
+
+const { Option } = Select;
+
+let index = 0;
+
 function addEditTransaction({setShowAddEditTransactionModal, showAddEditTransactionModal,getTransactions , selectedItemForEdit , setSelectedItemForEdit}:{
   setShowAddEditTransactionModal : any;
   showAddEditTransactionModal:any
@@ -22,6 +28,24 @@ function addEditTransaction({setShowAddEditTransactionModal, showAddEditTransact
 }) {
   const [type , setType]=useState(tost.semua)
   const [loading , setLoading] = useState(false)
+  const [items, setItems] = useState(['']);
+  const [name, setName] = useState('');
+  const inputRef = useRef<InputRef>(null);
+
+  const onNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setName(event.target.value);
+  };
+
+  const addItem = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    setItems([...items, name || `New item ${index++}`]);
+    setName('');
+    setTimeout(() => {
+      inputRef.current?.focus();
+    }, 0);
+  };
+
+
   const onFinish = async(values:any) => {
     try {
       const user = JSON.parse(localStorage.getItem('farhan-app') || '{}');
@@ -52,7 +76,7 @@ function addEditTransaction({setShowAddEditTransactionModal, showAddEditTransact
 }
   
   return (
-    <Modal title={selectedItemForEdit ? 'Edit Transaksi' : 'Add Transaction'} visible={showAddEditTransactionModal} onCancel={() => setShowAddEditTransactionModal(false)} footer={false}>
+    <Modal title={selectedItemForEdit ? 'Edit Transaksi' : 'Tambah Transaksi'} visible={showAddEditTransactionModal} onCancel={() => setShowAddEditTransactionModal(false)} footer={false}>
     {loading && <Spinner />}
     <Form layout='vertical' className='transaction-form' onFinish={onFinish} initialValues={selectedItemForEdit}>
       <Form.Item label="Total" name="total">
@@ -65,7 +89,29 @@ function addEditTransaction({setShowAddEditTransactionModal, showAddEditTransact
         </Select>
       </Form.Item>
     <Form.Item label="Katagori" name="katagori">
-      <Select placeholder="Pilihan Katagori" >
+      <Select placeholder="Pilihan Katagori" 
+      // mode="multiple"
+      dropdownRender={menu => (
+        <>
+          {menu}
+          <Divider style={{ margin: '8px 0' }} />
+          <Space style={{ padding: '0 8px 4px' }}>
+            <Input
+              placeholder="Masukan Katagori Baru"
+              ref={inputRef}
+              value={name}
+              onChange={onNameChange}
+            />
+            <Button type="text" icon={<PlusOutlined />} onClick={addItem}>
+              Tambah Baru
+            </Button>
+          </Space>
+        </>
+            )}
+      >
+                      {items.map(item => (
+      <Option key={item}>{item}</Option>
+    ))}
         {type === tost.Pemasukan && (
         <>
         <Select.Option value="Penjualan Shope ">Penjualan Dari Shope</Select.Option>

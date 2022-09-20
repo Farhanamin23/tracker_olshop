@@ -5,7 +5,6 @@ import axios from 'axios';
 import React, { useRef, useState } from 'react'
 import Spinner from './spinner';
 
-
 type test = {
   value: split;
 }
@@ -33,6 +32,7 @@ function addEditOrder({setShowAddEditOrderModal, showAddEditOrderModal,selectedI
   const [items, setItems] = useState(['']);
   const [name, setName] = useState('');
   const inputRef = useRef<InputRef>(null);
+  
 
   const onNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
@@ -85,7 +85,27 @@ function addEditOrder({setShowAddEditOrderModal, showAddEditOrderModal,selectedI
         { loading  && <Spinner />}
             <Form layout='vertical' className='transaction-form' onFinish={onFinish} initialValues={selectedItemForEdit}>      
                 <Form.Item label='Marketplace' name='marketplace'>
-                    <Select>
+                    <Select dropdownRender={menu => (
+                    <>
+                      {menu}
+                      <Divider style={{ margin: '8px 0' }} />
+                      <Space style={{ padding: '0 8px 4px' }}>
+                        <Input
+                          placeholder="Masukan Marketplace Baru"
+                          ref={inputRef}
+                          value={name}
+                          onChange={onNameChange}
+                        />
+                        <Button type="text" icon={<PlusOutlined />} onClick={addItem}>
+                          Tambah Baru
+                        </Button>
+                      </Space>
+                    </>
+                        )}
+                  >
+                                  {items.map(item => (
+                  <Option key={item}>{item}</Option>
+                ))}
                     <Select.Option value="shoope">Shope</Select.Option>
                     <Select.Option value="tokopedia">Tokopedia</Select.Option>
                     <Select.Option value="Tiktok">Tiktok</Select.Option>
@@ -102,14 +122,36 @@ function addEditOrder({setShowAddEditOrderModal, showAddEditOrderModal,selectedI
                 </Form.Item>
 
                 <Form.Item label='Jenis Produk' name='jenis' >
-                  <Select placeholder="Masukan Jenis Produk" onChange={(e) => setType(e)}>
+                  <Select placeholder="Masukan Jenis Produk" onChange={(e) => setType(e)} dropdownRender={menu => (
+                    <>
+                      {menu}
+                      <Divider style={{ margin: '8px 0' }} />
+                      <Space style={{ padding: '0 8px 4px' }}>
+                        <Input
+                          placeholder="Masukan Jenis Baru"
+                          ref={inputRef}
+                          value={name}
+                          onChange={onNameChange}
+                        />
+                        <Button type="text" icon={<PlusOutlined />} onClick={addItem}>
+                          Tambah Baru
+                        </Button>
+                      </Space>
+                    </>
+                        )}
+                  >
+                                  {items.map(item => (
+                  <Option key={item}>{item}</Option>
+                ))}
                     <Select.Option value="sabun">Sabun</Select.Option>
                     <Select.Option value="parfum">Parfum</Select.Option>
                   </Select>
                 </Form.Item>
                 
                 <Form.Item label='Nama Produk' name='katagori'>
-                  <Select placeholder='Pilihan Nama Produk'  style={{ width: 300 }}
+                  <Select 
+                  placeholder='Pilihan Nama Produk'
+                  // mode="multiple"
                   dropdownRender={menu => (
                     <>
                       {menu}
@@ -137,7 +179,7 @@ function addEditOrder({setShowAddEditOrderModal, showAddEditOrderModal,selectedI
                     <Select.Option value="pyary nalpamara">Sabun Pyary Nalpamara</Select.Option>
                     <Select.Option value="pyary pepaya">Sabun Pyary Pepaya</Select.Option>
                     <Select.Option value="pyary safron">Sabun Pyary Safron</Select.Option>
-                    <Select.Option value="pyary aloevera">Sabun Pyary Aloe Vera</Select.Option>
+                    <Select.Option value="pyary aloevera">Sabun Pyary Aloe Vera</Select.Option> 
                     </>
                   )}
                   {type === split.Parfum && (

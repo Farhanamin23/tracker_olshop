@@ -30,7 +30,7 @@ const ResselerSchema = new mongoose.Schema({
     require: true
   },
   tanggal: {
-    type:String,
+    type:Date,
     require: true
   },
   

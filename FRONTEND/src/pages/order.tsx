@@ -21,7 +21,7 @@ function order() {
   const [selectedRange , setSelectedRange]=useState<any>([])
   const [viewType, setViewType]=useState('table')
   const [selectedItemForEdit, setSelectedItemForEdit]=useState(null)
-
+  
   const getOrder = async ()=> {
     try {
       const user = JSON.parse(localStorage.getItem('farhan-app') || '{}');
@@ -62,7 +62,6 @@ function order() {
   useEffect(() => {
     getOrder()
   }, [frequency, selectedRange, jenis, status])
-  
   
   const columns = [
     {
@@ -113,7 +112,40 @@ function order() {
     },
     {
       title : "Nomor Order",
-      dataIndex : "order"
+      dataIndex : "order",
+      filterDropdown:({setSelectedKeys, selectedKeys, confirm  }) => {
+        return (
+        <>
+        <Input
+        autoFocus 
+        placeholder='Cari Berdasarkan Nomor Order'
+        value={selectedKeys[0]}
+        onChange={(e) => {
+          setSelectedKeys(e.target.value?[e.target.value]:[])
+          confirm({closeDropDown : false});
+        }}
+        onPressEnter={() => {
+          confirm();
+        }}
+        onBlur={() => {
+          confirm()
+        }}
+        />
+        <Button 
+        onClick={() => {
+          confirm();
+        }} 
+        type='primary'
+        >Cari
+        </Button>
+      </>
+      )},
+      filterIcon: () => {
+        return <SearchOutlined />
+      },
+      onFilter:(value, record) => {
+        return record.order.toLowerCase().includes(value.toLowerCase())
+      }
     },
     {
       title : "Jenis Produk",

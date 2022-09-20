@@ -4,10 +4,12 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import Spinner from './spinner';
 
-function addEditResseler ({showAddEditResellerModal , setShowAddEditResellerModal, getResseler}: {
+function addEditResseler ({showAddEditResellerModal , setShowAddEditResellerModal, getResseler , selectItemForEdit , setSelectItemForEdit}: {
   showAddEditResellerModal: any;
   setShowAddEditResellerModal:any;
   getResseler : any;
+  selectItemForEdit : any;
+  setSelectItemForEdit : any;
 }) {
   
   const [loading , setLoading]=useState(false)
@@ -16,10 +18,18 @@ function addEditResseler ({showAddEditResellerModal , setShowAddEditResellerModa
     try {
       const user = JSON.parse(localStorage.getItem('farhan-app') || '{}');
       setLoading(true);
+      if(selectItemForEdit)
+      {
+      await axios.post('/api/resseler/edit-resseler' , { payload : {...values , userid:user._id} , resellerId : selectItemForEdit._id});
+      getResseler()
+      message.success('Resseler Berhasil Di Update')
+      }else{
       await axios.post('/api/resseler/add-resseler' , {...values , userid:user._id});
       getResseler()
       message.success('Resseler Berhasil Di tambah')
+      }
       setShowAddEditResellerModal(false)
+      setSelectItemForEdit(null)
       setLoading(false)
     } catch (error) {
         message.error('Gagal Tambah Resseler')
@@ -28,9 +38,9 @@ function addEditResseler ({showAddEditResellerModal , setShowAddEditResellerModa
   }
     
   return (
-    <Modal title = 'Tambah Reseller' visible={showAddEditResellerModal}  onCancel={() => setShowAddEditResellerModal(false)} footer={false} >
+    <Modal title = {selectItemForEdit  ? 'Edit Ressler' : 'Tambah Resseler'} visible={showAddEditResellerModal}  onCancel={() => setShowAddEditResellerModal(false)} footer={false} >
     {loading && <Spinner />}
-    <Form layout='vertical' className='transaction-form' onFinish={onFinish}>
+    <Form layout='vertical' className='transaction-form' onFinish={onFinish} initialValues={selectItemForEdit}>
         <Form.Item label='Nama Reseller' name='nama'>
               <Input type='text' />
         </Form.Item>
@@ -49,8 +59,8 @@ function addEditResseler ({showAddEditResellerModal , setShowAddEditResellerModa
 
         <Form.Item label='Katagori Reseller' name='katagori'>
           <Select>
-          <Select.Option value='sabun'>Resseler Sabun</Select.Option>
-          <Select.Option value='parfum'>Resseler Parfum</Select.Option>
+          <Select.Option value='Resseler Sabun Pyary'>Resseler Sabun</Select.Option>
+          <Select.Option value='Resseler Parfum Daily'>Resseler Parfum</Select.Option>
           </Select>
         </Form.Item>
 
