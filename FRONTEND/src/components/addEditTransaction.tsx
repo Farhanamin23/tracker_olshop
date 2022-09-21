@@ -133,11 +133,11 @@ function addEditTransaction({setShowAddEditTransactionModal, showAddEditTransact
       <Form.Item label='Tanggal' name='tanggal'>
         <Input type='date' />
       </Form.Item>
-      <Form.Item label='Upload Slip Transaksi' name='image'>
+      {/* <Form.Item label='Upload Slip Transaksi' name='image'>
       <Input type="file"
       id="image" name="image"
       accept="image/png, image/jpeg" />
-      </Form.Item>
+      </Form.Item> */}
       <Form.Item label='Deskripsi' name='deskripsi'>
         <Input type='text' placeholder='Deskripsi' />
       </Form.Item>

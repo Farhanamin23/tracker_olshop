@@ -74,12 +74,8 @@ function home() {
       dataIndex : 'katagori',
     },
     {
-      title : "Type",
+      title : "Tipe",
       dataIndex : "type", 
-    },
-    {
-      title : "Bukti",
-      dataIndex : "image"  
     },
     {
       title : "Deskripsi",
