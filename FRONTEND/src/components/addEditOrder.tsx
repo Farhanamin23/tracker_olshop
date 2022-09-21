@@ -151,7 +151,6 @@ function addEditOrder({setShowAddEditOrderModal, showAddEditOrderModal,selectedI
                 <Form.Item label='Nama Produk' name='katagori'>
                   <Select 
                   placeholder='Pilihan Nama Produk'
-                  // mode="multiple"
                   dropdownRender={menu => (
                     <>
                       {menu}
