@@ -1,6 +1,6 @@
-const jwt = require("jsonwebtoken");
-const config = process.env;
+import jwt from 'jsonwebtoken'
 
+const config = process.env;
 const verifyToken = (req : any, res : any, next : any) => {
   const token =
     req.body.token || req.query.token || req.headers["token"];
@@ -17,4 +17,4 @@ const verifyToken = (req : any, res : any, next : any) => {
   return next();
 };
 
-module.exports = verifyToken;
+export default verifyToken

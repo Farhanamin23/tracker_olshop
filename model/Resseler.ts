@@ -38,4 +38,4 @@ const ResselerSchema = new mongoose.Schema({
 
 const resselermodel = mongoose.model('Reseller',  ResselerSchema)
 
-module.exports = resselermodel
+export default resselermodel

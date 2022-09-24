@@ -1,8 +1,8 @@
-import { response } from "express";
+import express from 'express'
 import moment from "moment";
+import Resseler from '../model/Resseler'
 
-const express = require('express')
-const Resseler = require('../model/Resseler')
+
 const router = express.Router()
 
 
@@ -57,4 +57,4 @@ router.post('/get-all-resseler' , async function (req , res) {
   }
 })
 
-module.exports = router
+export default router

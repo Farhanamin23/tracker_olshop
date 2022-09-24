@@ -1,9 +1,9 @@
-const express = require('express')
-const User = require('../model/User')
-const bcrypt = require('bcryptjs')
+import express from 'express'
+import  bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
+import auth from '../middleware/auth'
+const User = require('../model/User')
 const router = express.Router();
-const auth = require("../middleware/auth");
 
 router.post("/login", async (req, res) => {
   try {
@@ -88,4 +88,4 @@ router.post("/register", async (req, res) => {
   // Our register logic ends here
 });
 
-module.exports = router
+export default router

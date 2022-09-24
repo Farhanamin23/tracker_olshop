@@ -1,10 +1,13 @@
 import  express  from "express";
+import transactionRoute from './route/transactionRoute'
+import orderRoute from './route/orderRoute'
+import resselerRoute from './route/resselerRoute'
+import userRoute from './route/userRoutes'
 require("dotenv").config();
 require("./mconfig/dbConnect").connect();
-const transactionRoute = require('./route/transactionRoute')
-const orderRoute = require('./route/orderRoute')
-const resselerRoute = require('./route/resselerRoute')
-const userRoute= require('./route/userRoutes')
+// const orderRoute = require('./route/orderRoute')
+// const resselerRoute = require('./route/resselerRoute')
+// const userRoute= require('./route/userRoutes')
 const app = express()
 
 app.use(express.json())

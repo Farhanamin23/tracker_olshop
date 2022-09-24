@@ -1,6 +1,6 @@
 import express from 'express'
+import Order from '../model/Order'
 const moment = require('moment')
-const Order = require('../model/Order')
 const router = express.Router();
 
 router.post('/add-order', async function (req, res) {
@@ -55,4 +55,4 @@ router.post('/get-all-order', async (req, res) => {
   }
 })
 
-module.exports = router 
+export default router

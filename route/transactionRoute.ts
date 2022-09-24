@@ -1,25 +1,10 @@
 import express from 'express'
-const moment = require('moment')
-const Transaction  = require('../model/Transaction')
-const multer = require('multer')
-const path = require('path')
+import moment from 'moment'
+import Transaction  from '../model/Transaction'
 
 const router = express.Router();
 
-const storage= multer.diskStorage({
-    destination: ( req , file, cb ) => {
-    cb(null, './image/')
-    },
-    filename:(req,file,cb) => {
-      console.log(file);
-      cb(null, Date.now() + path.extname(file.originalname));
-    }
-})
-
-
-const upload = multer({storage : storage})
-
-router.post('/add-transaction', upload.single('image'), async function (req,res) {  
+router.post('/add-transaction',  async function (req,res) {  
   try {
     const newtransaction = new Transaction({
       userid: req.body.userid,
@@ -37,7 +22,7 @@ router.post('/add-transaction', upload.single('image'), async function (req,res)
   }
 })
 
-router.post('/edit-transaction', upload.single('image'), async function (req,res) {  
+router.post('/edit-transaction', async function (req,res) {  
   try {
     await Transaction.findOneAndUpdate({_id: req.body.transactionId}, req.body.payload)
     res.send('Transaksi Berhasil Di Update')
@@ -82,4 +67,5 @@ router.post("/get-all-transaction", async (req, res) => {
     res.status(500).json(error);
   }
 });
-module.exports = router
+
+export default router
