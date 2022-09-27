@@ -5,9 +5,7 @@ import resselerRoute from './route/resselerRoute'
 import userRoute from './route/userRoutes'
 require("dotenv").config();
 require("./config/dbConnect").connect();
-// const orderRoute = require('./route/orderRoute')
-// const resselerRoute = require('./route/resselerRoute')
-// const userRoute= require('./route/userRoutes')
+
 const app = express()
 
 app.use(express.json())

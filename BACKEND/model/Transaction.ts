@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const transactionSchema = new mongoose.Schema({
-  userid :{type:String, require:true},
+  transactionid :{type:String, require:true},
   total:{type: Number, require:true},
   type:{type: String, require:true},
   katagori:{type: String, require:true},
