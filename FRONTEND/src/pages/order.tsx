@@ -9,17 +9,18 @@ import DefaultLayout from '../components/DefaultLayout'
 import OrderAnalytic from '../components/OrderAnalytic'
 import Spinner from '../components/spinner'
 import '../style/transaction.css'
+
 const { RangePicker} = DatePicker;
 
 function order() {
-  const [showAddEditOrderModal, setShowAddEditOrderModal] = useState(false);
-  const [loading , setLoading] = useState(false);
+  const [showAddEditOrderModal, setShowAddEditOrderModal] = useState<Boolean>(false);
+  const [loading , setLoading] = useState<Boolean>(false);
   const [orderData, setOrderData]=useState([]);
-  const [ frequency , setFrequency ] = useState("7");
-  const [jenis , setJenis]=useState('Semua');
-  const [status , setStatus]=useState('semua');
+  const [ frequency , setFrequency ] = useState<String>("7");
+  const [jenis , setJenis]=useState<String>('Semua');
+  const [status , setStatus]=useState<String>('semua');
   const [selectedRange , setSelectedRange]=useState<any>([])
-  const [viewType, setViewType]=useState('table')
+  const [viewType, setViewType]=useState<String>('table')
   const [selectedItemForEdit, setSelectedItemForEdit]=useState(null)
   
   const getOrder = async ()=> {

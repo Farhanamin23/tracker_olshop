@@ -4,7 +4,7 @@ import orderRoute from './route/orderRoute'
 import resselerRoute from './route/resselerRoute'
 import userRoute from './route/userRoutes'
 require("dotenv").config();
-require("./mconfig/dbConnect").connect();
+require("./config/dbConnect").connect();
 // const orderRoute = require('./route/orderRoute')
 // const resselerRoute = require('./route/resselerRoute')
 // const userRoute= require('./route/userRoutes')

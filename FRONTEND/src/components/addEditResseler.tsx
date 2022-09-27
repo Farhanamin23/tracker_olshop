@@ -12,7 +12,7 @@ function addEditResseler ({showAddEditResellerModal , setShowAddEditResellerModa
   setSelectItemForEdit : any;
 }) {
   
-  const [loading , setLoading]=useState(false)
+  const [loading , setLoading]=useState<boolean>(false)
 
   const onFinish = async (values) => {
     try {
