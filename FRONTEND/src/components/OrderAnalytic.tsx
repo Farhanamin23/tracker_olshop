@@ -63,8 +63,8 @@ function OrderAnalytic({order}:{
           <h5>Orang Yang Order Sabun :  {totalSabunOrder.length}</h5>
           <h5>Orang Yang Order Parfum : {totalParfumOrder.length}</h5>
             <div className='progress-bars'>
-              <Progress className=' mx-5' strokeColor="green" type="circle" percent={totalSabunPercentage.toFixed(0)} />
-              <Progress strokeColor="red" type="circle" percent={totalParfumPercentage.toFixed(0)} />
+              <Progress className=' mx-5' strokeColor="green" type="circle" percent={totalSabunPercentage} />
+              <Progress strokeColor="red" type="circle" percent={totalParfumPercentage} />
             </div>
         </div>
       </div>
@@ -74,8 +74,8 @@ function OrderAnalytic({order}:{
           <h5>Jumlah Sabun   : {totalPenjualanSabunTurnover} pcs</h5>
           <h5>Jumlah Parfum: {totalPenjualanParfumTurnover} pcs</h5>
             <div className='progress-bars'>
-              <Progress className=' mx-5' strokeColor="green" type="circle" percent={totalPenjualanSabunTurnoverPercentage.toFixed(0)} />
-              <Progress strokeColor="red" type="circle" percent={totalPenjualanParfumTurnoverPercentage.toFixed(0)} />
+              <Progress className=' mx-5' strokeColor="green" type="circle" percent={totalPenjualanSabunTurnoverPercentage} />
+              <Progress strokeColor="red" type="circle" percent={totalPenjualanParfumTurnoverPercentage} />
             </div>
         </div>
       </div>
@@ -85,8 +85,8 @@ function OrderAnalytic({order}:{
           <h5>Barang Diterima  : {totalStatusPenjualanSabunTurnover} pcs</h5>
           <h5>Barang Di Kembalikan: {totalStatusPenjualanParfumTurnover} pcs</h5>
             <div className='progress-bars'>
-              <Progress className=' mx-5' strokeColor="green" type="circle" percent={totalStatusPenjualanSabunTurnoverPercentage.toFixed(0)} />
-              <Progress strokeColor="red" type="circle" percent={totalStatusPenjualanParfumTurnoverPercentage.toFixed(0)} />
+              <Progress className=' mx-5' strokeColor="green" type="circle" percent={totalStatusPenjualanSabunTurnoverPercentage} />
+              <Progress strokeColor="red" type="circle" percent={totalStatusPenjualanParfumTurnoverPercentage} />
             </div>
         </div>
       </div>
@@ -101,7 +101,7 @@ function OrderAnalytic({order}:{
               return (
             total > 0 && <div className='catagory-card'>
                 <h5>{katagori}</h5>
-                <Progress  percent={( ( total / totalPenjualanSabunTurnover)*100 ).toFixed(0)}/>
+                <Progress  percent={( ( total / totalPenjualanSabunTurnover)*100 )}/>
               </div>
             )})}
           </div>
@@ -115,7 +115,7 @@ function OrderAnalytic({order}:{
               return (
                 total > 0 && <div className='catagory-card'>
                 <h5>{katagori}</h5>
-                <Progress  percent={( ( total / totalPenjualanParfumTurnover)*100 ).toFixed(0)}/>
+                <Progress  percent={( ( total / totalPenjualanParfumTurnover)*100 )}/>
               </div>
             )})}
           </div>

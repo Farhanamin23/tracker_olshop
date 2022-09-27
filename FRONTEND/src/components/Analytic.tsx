@@ -29,8 +29,8 @@ function Analytic({transaction}:{
           <h5>Pengeluaran :{totalPengeluaranTransaction.length}</h5>
             
             <div className='progress-bars'>
-              <Progress className=' mx-5' strokeColor="green" type="circle" percent={totalPemasukanTransactionPercentage.toFixed(0)} />
-              <Progress strokeColor="red" type="circle" percent={totalPengeluaranTransactionPercentage.toFixed(0)} />
+              <Progress className=' mx-5' strokeColor="green" type="circle" percent={totalPemasukanTransactionPercentage} />
+              <Progress strokeColor="red" type="circle" percent={totalPengeluaranTransactionPercentage} />
             </div>
         </div>
       </div>
@@ -40,8 +40,8 @@ function Analytic({transaction}:{
           <h5>Pemasukan  : Rp.{totalPemasukanTurnover}</h5>
           <h5>Pengeluaran : Rp.{totalPengeluaranTurnover}</h5>
             <div className='progress-bars'>
-              <Progress className=' mx-5' strokeColor="green" type="circle" percent={totalPemasukanTurnoverPercentage.toFixed(0)} />
-              <Progress strokeColor="red" type="circle" percent={totalPengeluaranTurnoverPercentage.toFixed(0)} />
+              <Progress className=' mx-5' strokeColor="green" type="circle" percent={totalPemasukanTurnoverPercentage} />
+              <Progress strokeColor="red" type="circle" percent={totalPengeluaranTurnoverPercentage} />
             </div>
         </div>
       </div>
@@ -56,7 +56,7 @@ function Analytic({transaction}:{
             return ( 
             total >0 &&<div className='catagory-card'>
               ,<h5>{katagori}</h5>
-              <Progress  percent= { ((total / totalPemasukanTurnover )*100).toFixed(0)}/>
+              <Progress  percent= { ((total / totalPemasukanTurnover )*100)}/>
             </div>
           )})}
         </div>
@@ -69,7 +69,7 @@ function Analytic({transaction}:{
             return ( 
             total >0 &&<div className='catagory-card'>
               ,<h5>{katagori}</h5>
-              <Progress  percent= { ((total / totalPengeluaranTurnover )*100).toFixed(0)}/>
+              <Progress  percent= { ((total / totalPengeluaranTurnover )*100)}/>
             </div>
           )})}
         </div>
